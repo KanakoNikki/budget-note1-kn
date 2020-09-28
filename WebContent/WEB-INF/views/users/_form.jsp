@@ -6,7 +6,6 @@
         <c:forEach var="error" items="${errors}">
             ・<c:out value="${error}" /><br />
         </c:forEach>
-
     </div>
 </c:if>
 <label for="name">氏名</label><br />
@@ -18,4 +17,4 @@
 <br /><br />
 
 <input type="hidden" name="_token" value="${_token}" />
-<button type="submit">投稿</button>
+<button type="submit">確定</button>

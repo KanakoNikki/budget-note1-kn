@@ -31,10 +31,9 @@ public class UsersIndexServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-
-        Users users = new Users();
-        //↑コース通りのflushの処理をしていない！下でsetSttributeしたいからとりあえずここでインスタンス作成（9/27）
-        request.setAttribute("users", users);
+        //↓これでは格納。取り出しが必要（9/28）
+        //Users u = (Users)request.getSession().setAttribute("users", u);
+        Users u = (Users)request.getSession().getAttribute("users");
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/index.jsp");
         rd.forward(request, response);
