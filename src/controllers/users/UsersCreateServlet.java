@@ -64,7 +64,8 @@ public class UsersCreateServlet extends HttpServlet {
                 em.persist(u);
                 em.getTransaction().commit();
                 em.close();
-                request.getSession().setAttribute("users", u);
+                //↑DBに反映させるための処理
+                request.getSession().setAttribute("login_users", u);
                 response.sendRedirect(request.getContextPath() + "/users/index");
             }
         }

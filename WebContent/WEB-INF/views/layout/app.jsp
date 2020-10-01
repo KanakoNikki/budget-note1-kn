@@ -11,7 +11,16 @@
     <body>
         <div id="wrapper">
             <div id="header">
-                <h1>My Budget Note</h1>
+                <div id="header_menu">
+                    <c:if test="${sessionScope.login_users != null}">
+                        <h1><a href="<c:url value='/users/index' />">My budget Note</a></h1>&nbsp;&nbsp;&nbsp;
+                    </c:if>
+                </div>
+                <div id="users_name">
+                    <c:if test="${sessionScope.login_users != null}"><c:out value="${sessionScope.login_users.name}" />&nbsp;さん&nbsp;&nbsp;&nbsp;
+                        <a href="<c:url value='/logout' />">ログアウト</a>
+                    </c:if>
+                </div>
             </div>
             <div id="content">
                 ${param.content}

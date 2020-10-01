@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Users;
-
 /**
  * Servlet implementation class UsersIndexServlet
  */
@@ -33,8 +31,8 @@ public class UsersIndexServlet extends HttpServlet {
         // TODO Auto-generated method stub
         //↓これでは格納。取り出しが必要（9/28）
         //Users u = (Users)request.getSession().setAttribute("users", u);
-        Users u = (Users)request.getSession().getAttribute("users");
-
+//        Users u = (Users)request.getSession().getAttribute("users");セッションIDをそろえるために変更
+        request.getSession().getAttribute("login_users");
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/index.jsp");
         rd.forward(request, response);
     }
