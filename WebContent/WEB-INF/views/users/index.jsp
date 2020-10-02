@@ -21,5 +21,6 @@
                 </tr>
             </tbody>
         </table>
+        <a href="<c:url value='/budget/new' />">新規作成</a>
     </c:param>
 </c:import>

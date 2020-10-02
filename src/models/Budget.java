@@ -18,11 +18,7 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getAllBudgets",
             query = "SELECT b FROM Budget AS b ORDER BY b.id DESC"
-            ),
-    @NamedQuery(
-            name = "getBudgetsCount",
-            query = "SELECT COUNT(b) FROM Budget AS b"
-            ),
+            )
 })
 
 @Entity
