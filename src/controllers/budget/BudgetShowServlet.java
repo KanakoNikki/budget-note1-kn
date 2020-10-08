@@ -40,7 +40,6 @@ public class BudgetShowServlet extends HttpServlet {
         em.close();
         if(b != null && login_users.getId() == b.getUsers().getId()) {
             request.setAttribute("budget", b);
-//            request.getSession().setAttribute("login_users", login_users);
             request.setAttribute("_token", request.getSession().getId());
         }
 

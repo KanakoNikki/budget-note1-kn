@@ -48,7 +48,6 @@ public class BudgetEditServlet extends HttpServlet {
         if(b != null && login_users.getId() == b.getUsers().getId()) {
             request.setAttribute("budget", b);
             request.setAttribute("itemList", itemList);
-//            request.getSession().setAttribute("login_users", login_users);
             request.setAttribute("_token", request.getSession().getId());
             request.getSession().setAttribute("budget_id", b.getId());
         }

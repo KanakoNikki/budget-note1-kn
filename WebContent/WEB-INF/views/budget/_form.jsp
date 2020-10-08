@@ -16,29 +16,19 @@
 
 
 <label for="item_id">項目</label><br />
-<select name="item_id">
-<c:forEach var="items" items="${itemList}">
-<c:choose>
-<c:when test="${budget.getItem().getItem_Id() != null && budget.getItem().getItem_Id() == items.getItem_Id()}">
-<option value="${budget.getItem().getItem_Id()}" selected>${items.getItem_name()}</option>
-</c:when>
-<c:otherwise>
-<option value="${items.getItem_Id()}">${items.getItem_name()}</option>
-</c:otherwise>
-</c:choose>
-</c:forEach>
-</select>
-<br /><br />
-
-
-
-
-<!--  <select name="item_id">
-    <c:forEach var="item" items="${itemList}">
-        <option value="${item.getItem_Id()}">${item.getItem_name()}</option>
+    <select name="item_id">
+        <c:forEach var="items" items="${itemList}">
+            <c:choose>
+                <c:when test="${budget.getItem().getItem_Id() != null && budget.getItem().getItem_Id() == items.getItem_Id()}">
+                    <option value="${budget.getItem().getItem_Id()}" selected>${items.getItem_name()}</option>
+                </c:when>
+                <c:otherwise>
+                    <option value="${items.getItem_Id()}">${items.getItem_name()}</option>
+                </c:otherwise>
+            </c:choose>
     </c:forEach>
 </select>
-<br /><br /> -->
+<br /><br />
 
 <label for="amount">金額</label><br />
 <input type="number" name = "amount" value="${budget.amount}"/>

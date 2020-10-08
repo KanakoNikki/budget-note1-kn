@@ -34,23 +34,18 @@ public class BudgetIndexServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.getSession().getAttribute("login_users");
         Users login_users = (Users)request.getSession().getAttribute("login_users");
 
         EntityManager em = DBUtil.createEntityManager();
         List<Budget> budgets = em.createNamedQuery("getMyAllBudgets", Budget.class)
                 .setParameter("login_users", login_users).getResultList();
-//        List<Budget> itemId = em.createNamedQuery("getItemId", Budget.class)
-//                .setParameter("budget", budgets).getResultList();
-//       List<Item> itemId = em.createNamedQuery("getItemName", Item.class)
-//                .setParameter("item_id", budgets).getResultList();
-//       List<Item> i = em.find(Item.class, Integer.parseInt(budgets.item));
-
 
         em.close();
         request.setAttribute("budget", budgets);
- //       request.getSession().setAttribute("login_users", login_users);
- //       request.setAttribute("itemId", itemId);
+        if(request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/budget/index.jsp");
         rd.forward(request, response);
     }

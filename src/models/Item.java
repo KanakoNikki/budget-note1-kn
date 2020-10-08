@@ -11,11 +11,6 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getAllItems",
             query = "SELECT i FROM Item AS i"
-            ),
-
-    @NamedQuery(
-            name = "getItemColumns",
-            query = "SELECT COUNT(i) FROM Item AS i"
             )
 })
 

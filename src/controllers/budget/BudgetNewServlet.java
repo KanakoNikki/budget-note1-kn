@@ -37,20 +37,16 @@ public class BudgetNewServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("_token", request.getSession().getId());
- //       Users login_users = (Users)request.getSession().getAttribute("login_users");
         EntityManager em = DBUtil.createEntityManager();
         List<Item> itemList = em.createNamedQuery("getAllItems", Item.class)
                 .getResultList();
         em.close();
 
         Budget b = new Budget();
- //       Item i = new Item();
         b.setBudget_date(new Date(System.currentTimeMillis()));
 
         request.setAttribute("budget", b);
         request.setAttribute("itemList", itemList);
- //       request.setAttribute("item", i);
- //       request.getSession().setAttribute("login_users", login_users);
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/budget/new.jsp");
         rd.forward(request, response);
     }

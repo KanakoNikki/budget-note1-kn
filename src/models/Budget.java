@@ -18,12 +18,7 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getMyAllBudgets",
             query = "SELECT b FROM Budget AS b where b.users = :login_users ORDER BY b.id DESC"
-            ),
-
-/*    @NamedQuery(
-            name = "getItemClass",
-            query = "SELECT b FROM Budget AS b where b.item = :budget ORDER BY b.id DESC"
-            )*/
+            )
 })
 
 @Entity

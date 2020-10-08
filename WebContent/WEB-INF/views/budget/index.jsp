@@ -4,6 +4,11 @@
 
 <c:import url="../layout/app.jsp">
     <c:param name="content">
+        <c:if test="${flush != null}">
+            <div id="flush_success">
+                <c:out value="${flush}"></c:out>
+            </div>
+         </c:if>
          <h1><c:out value="${sessionScope.login_users.name}" />さんの履歴</h1>
         <table id="login_users.name">
             <tbody>

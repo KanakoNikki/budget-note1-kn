@@ -28,8 +28,6 @@ public class LogoutServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().removeAttribute("login_users");
-
-//        request.getSession().setAttribute("flush", "ログアウトしました。");
         response.sendRedirect(request.getContextPath() + "/");
     }
 

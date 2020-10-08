@@ -37,7 +37,6 @@ public class BudgetUpdateServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String _token = (String)request.getParameter("_token");
-//        Users login_users = (Users)request.getSession().getAttribute("login_users");
 
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
@@ -57,7 +56,6 @@ public class BudgetUpdateServlet extends HttpServlet {
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("budget", b);
                 request.setAttribute("errors", errors);
-//                request.getSession().setAttribute("login_users", login_users);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/budget/edit.jsp");
                 rd.forward(request, response);
@@ -65,10 +63,9 @@ public class BudgetUpdateServlet extends HttpServlet {
                 em.getTransaction().begin();
                 em.getTransaction().commit();
                 em.close();
-  //              request.getSession().setAttribute("flush", "更新が完了しました。");
+                request.getSession().setAttribute("flush", "更新が完了しました。");
 
                 request.getSession().removeAttribute("budget_id");
- //               request.getSession().setAttribute("login_users", login_users);
                 response.sendRedirect(request.getContextPath() + "/budget/index");
             }
         }
