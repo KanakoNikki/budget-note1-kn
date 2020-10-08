@@ -8,7 +8,7 @@ body {
 #header {
     width: 100%;
     height: 70px;
-    background-color: #333333;
+    background-color: #f8d7da;
 }
 
 #content {
@@ -20,11 +20,13 @@ body {
 h1 {
     font-size: 24px;
     display: inline;
+    color:#660000
 }
 
 h2 {
     font-size: 36px;
     margin-bottom: 15px;
+    color: #660000
 }
 
 li {
@@ -68,6 +70,7 @@ button {
 
 #footer {
     text-align: center;
+    color:#660000
 }
 
 #flush_success {
@@ -90,16 +93,6 @@ button {
     background-color: #f8d7da;
 }
 
-table#users_list th {
-    width: 30%;
-    padding: 10px 2%;
-}
-
-table#users_list td {
-    width: 29%;
-    padding: 10px 2%;
-}
-
 tr.row1 {
         background-color: #f2f2f2;
 }
@@ -119,7 +112,7 @@ select {
 }
 
 #users_name {
-    color: #cccccc;
+    color: #e18787;
     width: 36%;
     padding-right: 3%;
     text-align: right;
@@ -127,32 +120,11 @@ select {
 }
 
 #header a {
-    color: #eeeeee;
+    color: #660000;
 }
 
 h1 a {
     color: #eeeeee;
-}
-
-table#report_list th {
-    font-weight: bold;
-    padding: 10px 2%;
-}
-
-table#budget_list .komoku_name {
-    width: 20%;
-    padding: 10px 2%;
-}
-table#budget_list .check_date {
-    width: 20%;
-}
-
-table#budget_list .komoku_title {
-    width: 37%;
-}
-
-table#report_list .report_action {
-    width: 13%;
 }
 
 pre {
