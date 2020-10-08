@@ -13,7 +13,7 @@
             <div id="header">
                 <div id="header_menu">
                     <c:if test="${sessionScope.login_users != null}">
-                        <h1><a href="<c:url value='/users/index' />">My budget Note</a></h1>&nbsp;&nbsp;&nbsp;
+                        <h1><a href="<c:url value='/budget/index' />">My budget Note</a></h1>&nbsp;&nbsp;&nbsp;
                     </c:if>
                 </div>
                 <div id="users_name">

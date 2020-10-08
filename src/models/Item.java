@@ -3,7 +3,21 @@ package models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+@NamedQueries({
+    @NamedQuery(
+            name = "getAllItems",
+            query = "SELECT i FROM Item AS i"
+            ),
+
+    @NamedQuery(
+            name = "getItemColumns",
+            query = "SELECT COUNT(i) FROM Item AS i"
+            )
+})
 
 @Entity
 @Table(name = "item")

@@ -1,6 +1,7 @@
-package controllers.users;
+package controllers.budget;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,22 +12,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Users;
-import models.validators.UsersValidator;
+import models.Budget;
+import models.Item;
+import models.validators.BudgetValidator;
 import utils.DBUtil;
-import utils.EncryptUtil;
 
 /**
- * Servlet implementation class UsersCreateServlet
+ * Servlet implementation class BudgetUpdateServlet
  */
-@WebServlet("/users/create")
-public class UsersCreateServlet extends HttpServlet {
+@WebServlet("/budget/update")
+public class BudgetUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UsersCreateServlet() {
+    public BudgetUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,37 +37,38 @@ public class UsersCreateServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String _token = (String)request.getParameter("_token");
+//        Users login_users = (Users)request.getSession().getAttribute("login_users");
+
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            Users u = new Users();
+            Budget b = em.find(Budget.class, (Integer)(request.getSession().getAttribute("budget_id")));
 
-            u.setName(request.getParameter("name"));
-            u.setEmail(request.getParameter("email"));
-            u.setPassword(
-                    EncryptUtil.getPasswordEncrypt(
-                            request.getParameter("password"),
-                            (String)this.getServletContext().getAttribute("pepper")
-                            )
-                    );
+            b.setBudget_date(Date.valueOf(request.getParameter("budget_date")));
+            Item i = em.find(Item.class, Integer.parseInt(request.getParameter("item_id")));
+            b.setItem(i);
+            b.setDetail(request.getParameter("detail"));
+            b.setAmount(Integer.parseInt(request.getParameter("amount")));
 
-            List<String> errors = UsersValidator.validate(u, true);
+            List<String> errors = BudgetValidator.validate(b);
             if(errors.size() > 0) {
                 em.close();
 
                 request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("users", u);
+                request.setAttribute("budget", b);
                 request.setAttribute("errors", errors);
+//                request.getSession().setAttribute("login_users", login_users);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/new.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/budget/edit.jsp");
                 rd.forward(request, response);
             } else {
                 em.getTransaction().begin();
-                em.persist(u);
                 em.getTransaction().commit();
                 em.close();
-                //↑DBに反映させるための処理
-                request.getSession().setAttribute("login_users", u);
+  //              request.getSession().setAttribute("flush", "更新が完了しました。");
+
+                request.getSession().removeAttribute("budget_id");
+ //               request.getSession().setAttribute("login_users", login_users);
                 response.sendRedirect(request.getContextPath() + "/budget/index");
             }
         }

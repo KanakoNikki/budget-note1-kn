@@ -7,5 +7,6 @@
         <form method="POST" action="<c:url value='/users/create' />">
             <c:import url="_form.jsp" />
         </form>
+        <p><a href="<c:url value='/index.html' />">トップページへ戻る</a></p>
     </c:param>
 </c:import>

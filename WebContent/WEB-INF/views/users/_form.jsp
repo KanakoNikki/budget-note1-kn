@@ -12,6 +12,11 @@
 <input type="text" name="name" value="${users.name}" />
 <br /><br />
 
+
+<label for="email">Emailアドレス</label><br />
+<input type="email" name="email" />
+<br /><br />
+
 <label for="password">パスワード</label><br />
 <input type="password" name="password" />
 <br /><br />

@@ -14,18 +14,38 @@
 <input type="date" name="budget_date" value="<fmt:formatDate value='${budget.budget_date}' pattern='yyyy-MM-dd' />" />
 <br /><br />
 
-<select name="item">
-<option value="1">食費</option>
-<option value="2">生活費</option>
-<option value="3">固定費</option>
-<option value="4">衣類、美容</option>
-<option value="5">娯楽</option>
-<option value="6">その他</option>
+
+<label for="item_id">項目</label><br />
+<select name="item_id">
+<c:forEach var="items" items="${itemList}">
+<c:choose>
+<c:when test="${budget.getItem().getItem_Id() != null && budget.getItem().getItem_Id() == items.getItem_Id()}">
+<option value="${budget.getItem().getItem_Id()}" selected>${items.getItem_name()}</option>
+</c:when>
+<c:otherwise>
+<option value="${items.getItem_Id()}">${items.getItem_name()}</option>
+</c:otherwise>
+</c:choose>
+</c:forEach>
 </select>
 <br /><br />
 
+
+
+
+<!--  <select name="item_id">
+    <c:forEach var="item" items="${itemList}">
+        <option value="${item.getItem_Id()}">${item.getItem_name()}</option>
+    </c:forEach>
+</select>
+<br /><br /> -->
+
+<label for="amount">金額</label><br />
+<input type="number" name = "amount" value="${budget.amount}"/>
+<br /><br />
+
 <label for="detail">内容</label><br />
-<textarea name="content" rows="10" cols="50">${budget.detail}</textarea>
+<textarea name="detail" rows="10" cols="50">${budget.detail}</textarea>
 <br /><br />
 
 <input type="hidden" name="_token" value="${_token}" />

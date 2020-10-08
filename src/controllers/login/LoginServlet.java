@@ -54,6 +54,7 @@ public class LoginServlet extends HttpServlet {
         Boolean check_result = false;
 
         String plain_pass = request.getParameter("password");
+        String email = request.getParameter("email");
 
         Users u = null;
 
@@ -67,8 +68,9 @@ public class LoginServlet extends HttpServlet {
 
             // パスワードが正しいかチェックする
             try {
-                u = em.createNamedQuery("checkLoginPassword", Users.class)
+                u = em.createNamedQuery("checkLoginEmailAndPassword", Users.class)
                       .setParameter("pass", password)
+                      .setParameter("email", email)
                       .getSingleResult();
             } catch(NoResultException ex) {}
 
@@ -91,7 +93,7 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("login_users", u);
 
 //            request.getSession().setAttribute("flush", "ログインしました。");
-            response.sendRedirect(request.getContextPath() + "/users/index");
+            response.sendRedirect(request.getContextPath() + "/budget/index");
         }
     }
 

@@ -16,13 +16,18 @@ import javax.persistence.Table;
 
 @NamedQueries({
     @NamedQuery(
-            name = "getAllBudgets",
-            query = "SELECT b FROM Budget AS b ORDER BY b.id DESC"
-            )
+            name = "getMyAllBudgets",
+            query = "SELECT b FROM Budget AS b where b.users = :login_users ORDER BY b.id DESC"
+            ),
+
+/*    @NamedQuery(
+            name = "getItemClass",
+            query = "SELECT b FROM Budget AS b where b.item = :budget ORDER BY b.id DESC"
+            )*/
 })
 
 @Entity
-@Table(name = "buget")
+@Table(name = "budget")
 public class Budget {
     @Id
     @Column(name = "id")
@@ -84,7 +89,7 @@ public class Budget {
     }
 
     public void setAmount(Integer amount) {
-        this.id = amount;
+        this.amount = amount;
     }
 
     public String getDetail() {
