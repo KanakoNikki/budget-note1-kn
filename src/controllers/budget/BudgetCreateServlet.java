@@ -57,12 +57,30 @@ public class BudgetCreateServlet extends HttpServlet {
 
             List<Item> itemList = em.createNamedQuery("getAllItems", Item.class)
                     .getResultList();
-
             b.setDetail(request.getParameter("detail"));
-            b.setAmount(Integer.parseInt(request.getParameter("amount")));
+
+            String amountNull_error= new String();
+            String tooBigAmount_error= new String();
+
+            try {
+                    if(request.getParameter("amount")==null || request.getParameter("amount").equals("")){
+                        amountNull_error="金額を入力してください。";
+                    } else {
+                        b.setAmount(Integer.parseInt(request.getParameter("amount")));
+                    }
+                } catch(NumberFormatException e) {
+                    tooBigAmount_error = "金額は999,999以下で入力してください。";
+            }
 
             List<String> errors = BudgetValidator.validate(b);
-            if(errors.size() > 0) {
+            if(!amountNull_error.equals("")) {
+                errors.add(amountNull_error);
+            }
+            if(!tooBigAmount_error.equals("")) {
+                errors.add(tooBigAmount_error);
+            }
+
+            if(errors.size() > 0 ) {
                 em.close();
 
                 request.setAttribute("_token", request.getSession().getId());
@@ -78,7 +96,7 @@ public class BudgetCreateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
                 request.getSession().setAttribute("flush", "登録が完了しました。");
-                request.setAttribute("itemList", itemList);
+                request.setAttribute("_token", request.getSession().getId());
                 response.sendRedirect(request.getContextPath() + "/budget/index");
             }
         }

@@ -34,6 +34,7 @@
                 </table>
                 <c:if test="${sessionScope.login_users.getId() == budget.getUsers().getId()}">
                     <p><a href="<c:url value="/budget/edit?id=${budget.id}" />">この詳細を編集する</a></p>
+                    <input type="hidden" name="_token" value="${_token}" />
                 </c:if>
             </c:when>
             <c:otherwise>

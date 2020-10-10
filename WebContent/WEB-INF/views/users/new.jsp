@@ -27,6 +27,6 @@
 <input type="hidden" name="_token" value="${_token}" />
 <button type="submit">確定</button>
         </form>
-        <p><a href="<c:url value='/index.html' />">トップページへ戻る</a></p>
+        <p><a href="<c:url value='/toppage' />">トップページへ戻る</a></p>
     </c:param>
 </c:import>

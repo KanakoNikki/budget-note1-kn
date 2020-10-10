@@ -55,7 +55,7 @@ public class UsersCreateServlet extends HttpServlet {
                 em.close();
 
                 request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("users", u);
+                request.setAttribute("login_users", u);
                 request.setAttribute("errors", errors);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/new.jsp");
@@ -66,6 +66,7 @@ public class UsersCreateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
                 request.getSession().setAttribute("login_users", u);
+                request.setAttribute("_token", request.getSession().getId());
                 response.sendRedirect(request.getContextPath() + "/budget/index");
             }
         }

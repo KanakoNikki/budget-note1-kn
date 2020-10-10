@@ -46,16 +46,39 @@ public class BudgetUpdateServlet extends HttpServlet {
             b.setBudget_date(Date.valueOf(request.getParameter("budget_date")));
             Item i = em.find(Item.class, Integer.parseInt(request.getParameter("item_id")));
             b.setItem(i);
+            List<Item> itemList = em.createNamedQuery("getAllItems", Item.class)
+                    .getResultList();
+
             b.setDetail(request.getParameter("detail"));
-            b.setAmount(Integer.parseInt(request.getParameter("amount")));
+
+            String amountNull_error= new String();
+            String tooBigAmount_error= new String();
+
+            try {
+                    if(request.getParameter("amount")==null || request.getParameter("amount").equals("")){
+                        amountNull_error="金額を入力してください。";
+                    } else {
+                        b.setAmount(Integer.parseInt(request.getParameter("amount")));
+                    }
+                } catch(NumberFormatException e) {
+                    tooBigAmount_error = "金額は999,999以下で入力してください。";
+            }
 
             List<String> errors = BudgetValidator.validate(b);
+            if(!amountNull_error.equals("")) {
+                errors.add(amountNull_error);
+            }
+            if(!tooBigAmount_error.equals("")) {
+                errors.add(tooBigAmount_error);
+            }
+
             if(errors.size() > 0) {
                 em.close();
 
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("budget", b);
                 request.setAttribute("errors", errors);
+                request.setAttribute("itemList", itemList);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/budget/edit.jsp");
                 rd.forward(request, response);
@@ -64,7 +87,7 @@ public class BudgetUpdateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
                 request.getSession().setAttribute("flush", "更新が完了しました。");
-
+                request.setAttribute("_token", request.getSession().getId());
                 request.getSession().removeAttribute("budget_id");
                 response.sendRedirect(request.getContextPath() + "/budget/index");
             }

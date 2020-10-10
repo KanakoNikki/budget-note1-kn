@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getMyAllBudgets",
-            query = "SELECT b FROM Budget AS b where b.users = :login_users ORDER BY b.id DESC"
+            query = "SELECT b FROM Budget AS b where b.users = :login_users ORDER BY b.budget_date DESC"
             )
 })
 

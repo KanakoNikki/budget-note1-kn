@@ -35,6 +35,7 @@ public class UsersNewServlet extends HttpServlet {
         request.setAttribute("login_users", new Users());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/new.jsp");
+        request.getSession().setAttribute("flush", "ご登録ありがとうございます。");
         rd.forward(request, response);
     }
 }
