@@ -20,7 +20,7 @@
                          <tr>
                             <th>金額</th>
                             <td>
-                                <c:out value="${budget.amount}" />
+                                <c:out value="${budget.amount}" />円
                             </td>
                         </tr>
                         <tr>

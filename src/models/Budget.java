@@ -18,6 +18,10 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getMyAllBudgets",
             query = "SELECT b FROM Budget AS b where b.users = :login_users ORDER BY b.budget_date DESC"
+            ),
+    @NamedQuery(
+            name = "sumAllBudgets",
+            query = "SELECT SUM(b.amount) FROM Budget AS b where b.users = :login_users"
             )
 })
 

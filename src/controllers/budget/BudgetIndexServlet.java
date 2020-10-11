@@ -40,8 +40,24 @@ public class BudgetIndexServlet extends HttpServlet {
         List<Budget> budgets = em.createNamedQuery("getMyAllBudgets", Budget.class)
                 .setParameter("login_users", login_users).getResultList();
 
+/*        long budgetSum;
+        try{
+            budgetSum = (long)em.createNamedQuery("sumAllBudgets", Long.class)
+                    .setParameter("login_users", login_users).getSingleResult();
+        }catch(NullPointerException e){
+            budgetSum = 0;
+        }↑こっちでもOK！！*/
+
+        long budgetSum = 0;
+        Long budgetSumLong = null;
+        budgetSumLong = em.createNamedQuery("sumAllBudgets",Long.class).setParameter("login_users", login_users).getSingleResult();
+        if(budgetSumLong != null){
+            budgetSum=(long)budgetSumLong;
+        }
+
         em.close();
         request.setAttribute("budget", budgets);
+        request.setAttribute("budgetSum", budgetSum);
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");

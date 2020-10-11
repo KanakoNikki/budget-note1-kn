@@ -57,12 +57,14 @@ public class BudgetUpdateServlet extends HttpServlet {
             try {
                     if(request.getParameter("amount")==null || request.getParameter("amount").equals("")){
                         amountNull_error="金額を入力してください。";
+                    } else if(Integer.parseInt(request.getParameter("amount"))>999999){
+                        tooBigAmount_error = "金額は999,999以下で入力してください。";
                     } else {
                         b.setAmount(Integer.parseInt(request.getParameter("amount")));
                     }
                 } catch(NumberFormatException e) {
                     tooBigAmount_error = "金額は999,999以下で入力してください。";
-            }
+             }
 
             List<String> errors = BudgetValidator.validate(b);
             if(!amountNull_error.equals("")) {

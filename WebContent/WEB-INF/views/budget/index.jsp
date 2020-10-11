@@ -10,6 +10,7 @@
             </div>
          </c:if>
          <h1><c:out value="${sessionScope.login_users.name}" />さんの履歴</h1>
+         <h3>合計金額:　<c:out value="${budgetSum}" />円</h3>
         <table id="login_users.name">
             <tbody>
                 <tr>
@@ -22,7 +23,7 @@
                     <tr class="row${status.count % 2}">
                         <td class="budget_date"><fmt:formatDate value='${budget.budget_date}' pattern='yyyy-MM-dd' /></td>
                         <td class="budget_item"><c:out value="${budget.getItem().getItem_name()}" /></td>
-                        <td class="budget_amount">${budget.amount}</td>
+                        <td class="budget_amount">${budget.amount}円</td>
                         <td class="budget_action"><a href="<c:url value='/budget/show?id=${budget.id}' />">詳細を見る</a></td>
                     </tr>
                 </c:forEach>
