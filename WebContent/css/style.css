@@ -8,7 +8,7 @@ body {
 #header {
     width: 100%;
     height: 70px;
-    background-color: #f8d7da;
+    background-color: rgb(173 249 251);
 }
 
 #content {
@@ -20,13 +20,13 @@ body {
 h1 {
     font-size: 24px;
     display: inline;
-    color:#660000
+    color:#001f66
 }
 
 h2 {
     font-size: 36px;
     margin-bottom: 15px;
-    color: #660000
+    color: #001f66
 }
 
 li {
@@ -70,7 +70,7 @@ button {
 
 #footer {
     text-align: center;
-    color:#660000
+    color:#001f66
 }
 
 #flush_success {
@@ -112,7 +112,7 @@ select {
 }
 
 #users_name {
-    color: #e18787;
+    color: #8d87e1;
     width: 36%;
     padding-right: 3%;
     text-align: right;
@@ -120,7 +120,7 @@ select {
 }
 
 #header a {
-    color: #660000;
+    color: #000366;
 }
 
 h1 a {
@@ -133,6 +133,6 @@ pre {
 
 h3 {
     font-size: larger;
-    color:#660000;
+    color:#001f66;
     font-weight:bold;
 }
